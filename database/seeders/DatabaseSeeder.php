@@ -33,5 +33,12 @@ class DatabaseSeeder extends Seeder
             'status_id' => UserStatus::where('key', 'active')->first()?->id
         ]);
         $superAdminUser->assignRole($superAdminRole->id);
+        User::create([
+            'first_name' => 'Admin',
+            'last_name' => 'Admin',
+            'email' => 'admin@example.com',
+            'password' => Hash::make('12345678'),
+            'status_id' => UserStatus::where('key', 'active')->first()?->id
+        ]);
     }
 }
