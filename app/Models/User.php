@@ -36,6 +36,7 @@ class User extends Authenticatable implements FilamentUser, HasAvatar, HasName
         'country_code',
         'phone',
         'email',
+        'username',
         'password',
         'avatar',
         'status_id',
@@ -75,11 +76,21 @@ class User extends Authenticatable implements FilamentUser, HasAvatar, HasName
     }
 
     /**
-     * Get filamanrt user's avatar URL
+     * Get filament user's avatar URL
      *
      * @return string|null
      */
     public function getFilamentAvatarUrl(): ?string
+    {
+        return $this->avatar_url;
+    }
+
+    /**
+     * Get user's avatar URL
+     *
+     * @return string|null
+     */
+    public function getAvatarUrlAttribute(): ?string
     {
         // User uploaded avatar
         if ($this->avatar && Storage::disk('public')->exists($this->avatar)) {
