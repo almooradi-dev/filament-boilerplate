@@ -57,10 +57,16 @@ git remote add upstream https://github.com/almooradi-dev/filament-boilerplate.gi
 
 **Push the cloned code to the new repository**
 ```bash
-git push origin master
+git push origin main
 ```
 
 **Push all branches to `origin` (new repo)**
 ```bash
 git push --all
+```
+
+**Get changes from `upstream`**
+```bash
+git fetch upstream
+git merge upstream/main
 ```
