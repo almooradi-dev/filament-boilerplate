@@ -71,6 +71,7 @@ class AdminPanelProvider extends PanelProvider
                 \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make(),
                 \Filament\SpatieLaravelTranslatablePlugin::make()
                     ->defaultLocales(['en', 'ar']),
+                \Coolsam\Modules\ModulesPlugin::make()
             ]);
     }
 }
