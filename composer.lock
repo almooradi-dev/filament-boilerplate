@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "56582e129f376d6c36f245da6f5fcf75",
+    "content-hash": "ffd9a1542320b23a1ba93e37779e8b3f",
     "packages": [
         {
             "name": "anourvalar/eloquent-serialize",
@@ -642,36 +642,33 @@
         },
         {
             "name": "coolsam/modules",
-            "version": "v4.0.6",
+            "version": "v4.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/savannabits/filament-modules.git",
-                "reference": "045570cafb40608b232ff88d2d2339178a0dea82"
+                "reference": "9da56aa457527b95a5a7c2739dde5ebc2255f61a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/savannabits/filament-modules/zipball/045570cafb40608b232ff88d2d2339178a0dea82",
-                "reference": "045570cafb40608b232ff88d2d2339178a0dea82",
+                "url": "https://api.github.com/repos/savannabits/filament-modules/zipball/9da56aa457527b95a5a7c2739dde5ebc2255f61a",
+                "reference": "9da56aa457527b95a5a7c2739dde5ebc2255f61a",
                 "shasum": ""
             },
             "require": {
                 "filament/filament": "^3.0",
-                "nwidart/laravel-modules": "^11.0",
-                "php": "^8.1|^8.2|^8.3",
+                "nwidart/laravel-modules": "^11.0|^12.0",
+                "php": "^8.2",
                 "spatie/laravel-package-tools": "^1.15.0"
             },
             "require-dev": {
+                "barryvdh/laravel-ide-helper": "^3.5",
                 "laravel/pint": "^1.0",
-                "nunomaduro/collision": "^8.1",
-                "nunomaduro/larastan": "^2.0.1",
-                "orchestra/testbench": "^9.0",
-                "pestphp/pest": "^2.1",
-                "pestphp/pest-plugin-arch": "^2.0",
-                "pestphp/pest-plugin-laravel": "^2.0",
-                "phpstan/extension-installer": "^1.1",
-                "phpstan/phpstan-deprecation-rules": "^1.0",
-                "phpstan/phpstan-phpunit": "^1.0",
-                "spatie/laravel-ray": "^1.26"
+                "nunomaduro/larastan": "^3.1.0",
+                "orchestra/testbench": "^9.12",
+                "pestphp/pest-plugin-laravel": "^3.1",
+                "pestphp/pest-plugin-livewire": "^3.0",
+                "phpstan/extension-installer": "^1.4.3",
+                "spatie/laravel-ray": "^1.39"
             },
             "type": "library",
             "extra": {
@@ -719,7 +716,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-04-24T16:14:16+00:00"
+            "time": "2025-03-19T16:55:41+00:00"
         },
         {
             "name": "danharrin/date-format-converter",
