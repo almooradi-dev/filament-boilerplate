@@ -13,7 +13,7 @@ Admin credentials:
 
 **Generate permissions and assign to super admin**
 ```bash
-php artisan shield:generate --all
+php artisan shield:generate --all --ignore-existing-policies --panel=admin
 ```
 
 **Link storage**
