@@ -37,7 +37,7 @@ class AdminPanelProvider extends PanelProvider
             ->sidebarCollapsibleOnDesktop()
 
             // TODO: Chaneg logo and name from the settings page
-            ->brandName(fn() => app(CoreSettings::class)->app_name) // Default from env('APP_NAME')
+            ->brandName(fn() => app(CoreSettings::class)->app_name)
             // ->brandLogo(asset('assets/images/logo.png')) // It will override the "brandName"
             ->brandLogoHeight('3rem')
             // ->favicon(asset('images/favicon.png'))
