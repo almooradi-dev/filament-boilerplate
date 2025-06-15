@@ -54,4 +54,12 @@ return [
     'no' => 'لا',
     'administration' => 'الإدارة',
     'export' => 'تصدير',
+    'add' => 'إضافة',
+    'remove' => 'إزالة',
+
+    // Other
+    'page' => 'صفحة',
+    'pages' => 'صفحات',
+    'content' => 'محتوى',
+    'the_content' => 'المحتوى',
 ];

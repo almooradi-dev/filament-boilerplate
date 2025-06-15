@@ -54,4 +54,12 @@ return [
     'no' => 'No',
     'administration' => 'Administration',
     'export' => 'Export',
+    'add' => 'Add',
+    'remove' => 'Remove',
+
+    // Other
+    'page' => 'Page',
+    'pages' => 'Pages',
+    'content' => 'Content',
+    'the_content' => 'Content',
 ];
