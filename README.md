@@ -113,3 +113,8 @@ git push --all
 git fetch upstream
 git merge upstream/main
 ```
+
+# TODO
+- Add documentation for:
+    - Notifications
+    - Google Analytics
