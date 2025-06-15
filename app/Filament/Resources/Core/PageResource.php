@@ -13,6 +13,8 @@ use Filament\Forms\Form;
 use Filament\Resources\Concerns\Translatable;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Table;
 
 class PageResource extends Resource
@@ -37,7 +39,7 @@ class PageResource extends Resource
 
     public static function getPluralModelLabel(): string
     {
-        return __('core.pages');
+        return __('core.the_pages');
     }
 
     public static function form(Form $form): Form
@@ -85,7 +87,10 @@ class PageResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
-            ->columns([])
+            ->columns([
+                TextColumn::make('name')->label(__('core.name')),
+                ToggleColumn::make('is_active')->label(__('core.is_active')),
+            ])
             ->filters([
                 //
             ])

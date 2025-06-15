@@ -60,6 +60,7 @@ return [
     // Other
     'page' => 'Page',
     'pages' => 'Pages',
+    'the_pages' => 'Pages',
     'content' => 'Content',
     'the_content' => 'Content',
 ];

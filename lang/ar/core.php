@@ -60,6 +60,7 @@ return [
     // Other
     'page' => 'صفحة',
     'pages' => 'صفحات',
+    'the_pages' => 'الصفحات',
     'content' => 'محتوى',
     'the_content' => 'المحتوى',
 ];
