@@ -40,7 +40,7 @@ class AdminPanelProvider extends PanelProvider
             ->brandName(fn() => app(CoreSettings::class)->app_name)
             // ->brandLogo(asset('assets/images/logo.png')) // It will override the "brandName"
             ->brandLogoHeight('3rem')
-            // ->favicon(asset('images/favicon.png'))
+            // ->favicon(asset('assets/images/favicon.ico')) // You can generate it from here https://www.logoai.com/favicon-generator
 
             // Other
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
