@@ -1,5 +1,8 @@
 # TODO:
-- [ ] Upgrade to Laravel 12
+- [x] Upgrade to Laravel 12
+- [ ] Add documentation for:
+    - [ ] Notifications
+    - [ ] Google Analytics
 
 # Setup
 **Migrate**
@@ -113,8 +116,3 @@ git push --all
 git fetch upstream
 git merge upstream/main
 ```
-
-# TODO
-- Add documentation for:
-    - Notifications
-    - Google Analytics
