@@ -6,6 +6,7 @@ namespace App\Models;
 
 use App\Models\Core\UserStatus;
 use App\Settings\CoreSettings;
+use App\Traits\HasNotifications;
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Models\Contracts\HasAvatar;
 use Filament\Models\Contracts\HasName;
@@ -23,7 +24,7 @@ use Spatie\Permission\Traits\HasRoles;
 class User extends Authenticatable implements FilamentUser, HasAvatar, HasName
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable, SoftDeletes, HasRoles, HasApiTokens;
+    use HasFactory, Notifiable, SoftDeletes, HasRoles, HasApiTokens, HasNotifications;
 
     /**
      * The attributes that are mass assignable.
