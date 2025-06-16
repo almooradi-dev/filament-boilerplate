@@ -11,6 +11,7 @@ use Filament\Forms\Components\Section;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
+use Filament\Forms\Set;
 use Filament\Resources\Concerns\Translatable;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -19,6 +20,7 @@ use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Str;
 
 class UserStatusResource extends Resource
 {
@@ -48,12 +50,24 @@ class UserStatusResource extends Resource
         return $form
             ->schema([
                 TextInput::make('name')
+                    ->label(__('core.name'))
+                    ->live(onBlur: true)
+                    ->afterStateUpdated(function (Set $set, ?string $state, $livewire) {
+                        if ($livewire->activeLocale === 'en') {
+                            $set('key', str_replace('-', '_', Str::slug($state)));
+                        }
+                    })
                     ->required(),
                 TextInput::make('key')
-                    ->required(),
+                    ->label(__('core.key'))
+                    ->required()
+                    ->readOnly(),
                 ColorPicker::make('color')
+                    ->label(__('core.color'))
                     ->required(),
                 Toggle::make('is_active')
+                    ->label(__('core.is_active'))
+                    ->default(true)
             ]);
     }
 
