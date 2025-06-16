@@ -73,6 +73,7 @@ class UserStatusResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->withGlobalCustomization()
             ->columns([
                 TextColumn::make('name')->searchable()->sortable()->label(__('core.name')),
                 TextColumn::make('key')->searchable()->sortable()->label(__('core.key')),

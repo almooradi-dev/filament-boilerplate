@@ -87,6 +87,7 @@ class PageResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->withGlobalCustomization()
             ->columns([
                 TextColumn::make('name')->label(__('core.name')),
                 ToggleColumn::make('is_active')->label(__('core.is_active')),

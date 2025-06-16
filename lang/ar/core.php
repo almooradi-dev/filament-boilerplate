@@ -63,4 +63,5 @@ return [
     'the_pages' => 'الصفحات',
     'content' => 'محتوى',
     'the_content' => 'المحتوى',
+    'no_data_was_found' => 'لم يتم العثور على بيانات',
 ];

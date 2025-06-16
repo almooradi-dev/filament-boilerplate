@@ -115,6 +115,7 @@ class UserResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->withGlobalCustomization()
             ->columns([
                 TextColumn::make('first_name')->searchable()->sortable()->label(__('core.first_name')),
                 TextColumn::make('last_name')->searchable()->sortable()->label(__('core.last_name')),
