@@ -5,9 +5,7 @@ namespace App\Filament\Resources\Core;
 use App\Filament\Resources\Core\UserStatusResource\Pages;
 use App\Models\Core\UserStatus;
 use App\Tables\Columns\ColorColumn;
-use Filament\Actions\LocaleSwitcher;
 use Filament\Forms\Components\ColorPicker;
-use Filament\Forms\Components\Section;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
@@ -67,6 +65,7 @@ class UserStatusResource extends Resource
                     ->required(),
                 Toggle::make('is_active')
                     ->label(__('core.is_active'))
+                    ->inline(false)
                     ->default(true)
             ]);
     }
