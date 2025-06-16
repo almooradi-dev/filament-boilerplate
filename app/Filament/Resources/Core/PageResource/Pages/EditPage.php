@@ -5,6 +5,7 @@ namespace App\Filament\Resources\Core\PageResource\Pages;
 use App\Filament\Resources\Core\PageResource;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
+use App\Vendor\Filament\Actions\LocaleSwitcher;
 
 class EditPage extends EditRecord
 {
@@ -16,7 +17,7 @@ class EditPage extends EditRecord
     {
         return [
             Actions\DeleteAction::make(),
-            Actions\LocaleSwitcher::make(),
+            LocaleSwitcher::make(),
         ];
     }
 }

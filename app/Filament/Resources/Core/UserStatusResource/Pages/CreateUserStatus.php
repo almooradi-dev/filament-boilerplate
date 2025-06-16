@@ -3,7 +3,7 @@
 namespace App\Filament\Resources\Core\UserStatusResource\Pages;
 
 use App\Filament\Resources\Core\UserStatusResource;
-use Filament\Actions;
+use App\Vendor\Filament\Actions\LocaleSwitcher;
 use Filament\Resources\Pages\CreateRecord;
 
 class CreateUserStatus extends CreateRecord
@@ -15,7 +15,7 @@ class CreateUserStatus extends CreateRecord
     protected function getHeaderActions(): array
     {
         return [
-            Actions\LocaleSwitcher::make(),
+            LocaleSwitcher::make(),
         ];
     }
 }

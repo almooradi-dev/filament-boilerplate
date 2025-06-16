@@ -5,6 +5,7 @@ namespace App\Filament\Resources\Core\PageResource\Pages;
 use App\Filament\Resources\Core\PageResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
+use App\Vendor\Filament\Actions\LocaleSwitcher;
 
 class ListPages extends ListRecords
 {
@@ -16,7 +17,7 @@ class ListPages extends ListRecords
     {
         return [
             Actions\CreateAction::make(),
-            Actions\LocaleSwitcher::make(),
+            LocaleSwitcher::make(),
         ];
     }
 }

@@ -3,9 +3,8 @@
 namespace App\Filament\Resources\Core\PageResource\Pages;
 
 use App\Filament\Resources\Core\PageResource;
-use Filament\Actions;
 use Filament\Resources\Pages\CreateRecord;
-use Filament\Resources\Pages\CreateRecord\Concerns\Translatable;
+use App\Vendor\Filament\Actions\LocaleSwitcher;
 
 class CreatePage extends CreateRecord
 {
@@ -16,7 +15,7 @@ class CreatePage extends CreateRecord
     protected function getHeaderActions(): array
     {
         return [
-            Actions\LocaleSwitcher::make(),
+            LocaleSwitcher::make(),
         ];
     }
 }

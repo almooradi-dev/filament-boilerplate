@@ -5,6 +5,7 @@ namespace App\Filament\Resources\Core\UserStatusResource\Pages;
 use App\Filament\Resources\Core\UserStatusResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
+use App\Vendor\Filament\Actions\LocaleSwitcher;
 
 class ListUserStatuses extends ListRecords
 {
@@ -16,7 +17,7 @@ class ListUserStatuses extends ListRecords
     {
         return [
             Actions\CreateAction::make(),
-            Actions\LocaleSwitcher::make(),
+            LocaleSwitcher::make(), // TODO: Add to documentation
         ];
     }
 }

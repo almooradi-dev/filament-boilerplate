@@ -5,6 +5,7 @@ namespace App\Filament\Resources\Core\UserStatusResource\Pages;
 use App\Filament\Resources\Core\UserStatusResource;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
+use App\Vendor\Filament\Actions\LocaleSwitcher;
 
 class EditUserStatus extends EditRecord
 {
@@ -18,7 +19,7 @@ class EditUserStatus extends EditRecord
             Actions\DeleteAction::make(),
             Actions\ForceDeleteAction::make(),
             Actions\RestoreAction::make(),
-            Actions\LocaleSwitcher::make(),
+            LocaleSwitcher::make(),
         ];
     }
 }
