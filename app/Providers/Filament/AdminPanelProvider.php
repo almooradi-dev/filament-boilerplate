@@ -32,9 +32,10 @@ class AdminPanelProvider extends PanelProvider
             // Theme
             ->spa()
             ->colors([
-                'primary' => Color::Amber,
+                'primary' => Color::Pink,
             ])
             ->sidebarCollapsibleOnDesktop()
+            ->viteTheme('resources/css/filament/admin/theme-01.css')
 
             // TODO: Chaneg logo and name from the settings page
             ->brandName(fn() => app(CoreSettings::class)->app_name)
