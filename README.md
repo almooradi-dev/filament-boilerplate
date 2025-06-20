@@ -5,7 +5,7 @@
     - [ ] Google Analytics
 - [ ] Add link to https://github.com/alexeymezenin/laravel-best-practices#follow-laravel-naming-conventions as a reference
 - [ ] Themes
-    - [-] Theme 01
+    - [ ] Theme 01
 
 # Setup
 **Migrate**
