@@ -7,10 +7,8 @@ use Filament\Actions\LocaleSwitcher as ActionsLocaleSwitcher;
 
 class LocaleSwitcher extends ActionsLocaleSwitcher
 {
-    public function visible(bool | Closure $condition = true): static
+    public function isVisible(): bool
     {
-        $this->isVisible = config('filament.localization.enabled', false) && config('filament.localization.show_locale_switcher', true);
-
-        return $this;
+        return config('filament.localization.enabled', false) && config('filament.localization.show_locale_switcher', true);
     }
 }
