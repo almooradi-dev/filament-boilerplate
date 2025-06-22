@@ -2,9 +2,9 @@
 
 namespace App\Models\Core;
 
+use App\Traits\HasTranslations;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Spatie\Translatable\HasTranslations;
 
 class UserNotification extends Model
 {
