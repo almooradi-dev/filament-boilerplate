@@ -37,6 +37,12 @@ php artisan key:generate
 DEBUGBAR_ENABLED=false # Add to .env
 ```
 
+**Scheduler** (if needed)
+```bash
+# Run queue
+php artisan schedule:run >> /dev/null 2>&1
+```
+
 # Optimizing Filament for production
 
 ```bash
