@@ -1,8 +1,10 @@
 <?php
 return [
-    // Dashboard Page
+    // Dates
     'start_date' => 'Start date',
     'end_date' => 'End date',
+    'start_time' => 'Start time',
+    'end_time' => 'End time',
 
     // User Page
     'user' => 'User',
@@ -47,6 +49,9 @@ return [
     'is_inactive' => 'Is inactive?',
     'inactive' => 'Inactive',
     'key' => 'Key',
+    'slug' => 'Slug',
+    'short_description' => 'Short description',
+    'the_description' => 'Description',
     'all' => 'All',
     'from' => 'From',
     'until' => 'Until',

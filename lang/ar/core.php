@@ -1,8 +1,10 @@
 <?php
 return [
-    // Dashboard Page
+    // Dates
     'start_date' => 'تاريخ البدء',
     'end_date' => 'تاريخ الانتهاء',
+    'start_time' => 'وقت البدء',
+    'end_time' => 'وقت الانتهاء',
 
     // User Page
     'user' => 'المستخدم',
@@ -47,6 +49,9 @@ return [
     'is_inactive' => 'غير نشط؟',
     'inactive' => 'غير نشط',
     'key' => 'المفتاح',
+    'slug' => 'الرابط الدائم',
+    'short_description' => 'وصف قصير',
+    'the_description' => 'الوصف',
     'all' => 'الكل',
     'from' => 'من',
     'until' => 'حتى',
