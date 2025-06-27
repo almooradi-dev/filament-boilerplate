@@ -11,6 +11,8 @@ use Illuminate\Support\Stringable;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use App\Traits\HasTranslations;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Exception;
 
 class AppServiceProvider extends ServiceProvider
@@ -70,5 +72,43 @@ class AppServiceProvider extends ServiceProvider
                 return $itemArray ?? $item->toArray();
             });
         });
+
+        // $this->registerMigrationSqlLogger(); // TODO: Add to docs
+    }
+
+    protected function registerMigrationSqlLogger(): void
+    {
+        // Log executed SQL queries **only** during migration-related Artisan commands.
+        // This is useful for environments without SSH, where migrations are run locally
+        // and SQL needs to be manually copied to a remote server (e.g., via phpMyAdmin).
+
+        if ($this->app->runningInConsole() && $this->isRunningMigrationArtisanCommand()) {
+            DB::listen(function ($query) {
+                $sql = $query->sql;
+                foreach ($query->bindings as $binding) {
+                    $binding = is_numeric($binding) ? $binding : "'" . addslashes($binding) . "'";
+                    $sql = preg_replace('/\?/', $binding, $sql, 1);
+                }
+
+                file_put_contents(
+                    storage_path('logs/migrations.sql'),
+                    $sql . ";\n",
+                    FILE_APPEND
+                );
+            });
+        }
+    }
+
+    protected function isRunningMigrationArtisanCommand(): bool
+    {
+        $commands = [
+            'migrate',
+            'migrate:rollback',
+            'migrate:refresh',
+            'migrate:fresh',
+            'migrate:reset'
+        ];
+
+        return isset($_SERVER['argv'][1]) && in_array($_SERVER['argv'][1], $commands);
     }
 }
