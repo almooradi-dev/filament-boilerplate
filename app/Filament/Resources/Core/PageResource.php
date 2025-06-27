@@ -74,6 +74,8 @@ class PageResource extends Resource
                     TextInput::make('button_link'),
                 ])
                 ->columns(2),
+            TextInput::make('quote'),
+            TextInput::make('quote_author'),
         ];
 
         return $form
