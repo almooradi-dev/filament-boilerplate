@@ -1,0 +1,25 @@
+@import '../../../../vendor/filament/filament/resources/css/theme.css';
+
+@config 'tailwind.config.js';
+
+@layer components {
+    body {
+        background: linear-gradient(135deg, #fff 0%, rgba(var(--primary-600), 0.01) 50%, rgba(var(--primary-600), 0.07) 100%) !important;
+        backdrop-filter: blur(100px);
+        -webkit-backdrop-filter: blur(100px);
+    }
+
+    .fi-sidebar-header,
+    .fi-topbar nav {
+        background: transparent !important;
+        box-shadow: none !important;
+    }
+
+    .fi-sidebar-item-active .fi-sidebar-item-button,
+    .fi-fo-tabs,
+    .fi-section,
+    .fi-ta-ctn {
+        background: white;
+        box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.1) !important;
+    }
+}

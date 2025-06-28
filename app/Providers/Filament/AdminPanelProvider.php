@@ -36,6 +36,7 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->sidebarCollapsibleOnDesktop()
             // ->viteTheme('resources/css/filament/admin/theme-01.css')
+            // ->viteTheme('resources/css/filament/admin/theme-02.css')
 
             // TODO: Chaneg logo and name from the settings page
             ->brandName(fn() => app(CoreSettings::class)->app_name)
