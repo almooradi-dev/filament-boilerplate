@@ -71,6 +71,7 @@ class UserResource extends Resource
                     ->reactive()
                     ->dehydrateStateUsing(fn($state) => Hash::make($state))
                     ->dehydrated(fn($state) => !empty($state) ? true : false)
+                    ->revealable()
                     ->autocomplete('new-password'), // "False" not working but "new-password" do
                 TextInput::make('password_confirmation')
                     ->label(__('core.password_confirmation'))
@@ -79,6 +80,7 @@ class UserResource extends Resource
                     ->required(fn($get) => !empty($get('password')) ? true : false)
                     ->same('password')
                     ->dehydrated(false)
+                    ->revealable()
                     ->autocomplete('new-password'), // "False" not working but "new-password" do
 
                 TextInput::make('country_code')
