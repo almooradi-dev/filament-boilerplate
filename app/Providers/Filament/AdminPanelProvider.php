@@ -10,6 +10,7 @@ use Filament\Pages;
 use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
+use Filament\Support\Enums\MaxWidth;
 use Filament\Widgets;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
@@ -35,6 +36,7 @@ class AdminPanelProvider extends PanelProvider
                 'primary' => Color::Pink,
             ])
             ->sidebarCollapsibleOnDesktop()
+            ->maxContentWidth(MaxWidth::Full)
             // ->viteTheme('resources/css/filament/admin/theme-01.css')
             // ->viteTheme('resources/css/filament/admin/theme-02.css')
 
@@ -45,6 +47,7 @@ class AdminPanelProvider extends PanelProvider
             // ->favicon(asset('assets/images/favicon.ico')) // You can generate it from here https://www.logoai.com/favicon-generator
 
             // Other
+            ->unsavedChangesAlerts()
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
             ->pages([
