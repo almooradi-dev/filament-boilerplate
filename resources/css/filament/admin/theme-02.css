@@ -8,6 +8,9 @@
         backdrop-filter: blur(100px);
         -webkit-backdrop-filter: blur(100px);
     }
+    html[dir=rtl] body {
+        background: linear-gradient(-135deg, #fff 0%, rgba(var(--primary-600), 0.01) 50%, rgba(var(--primary-600), 0.07) 100%) !important;
+    }
 
     .fi-sidebar-header,
     .fi-topbar nav {
