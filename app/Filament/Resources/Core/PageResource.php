@@ -203,12 +203,14 @@ class PageResource extends Resource
                                                     ->headers([
                                                         Header::make('label'),
                                                         Header::make('value'),
-                                                        Header::make('icon'),
+                                                        Header::make('icon')->width('200px'),
+                                                        Header::make('color')->width('150px'),
                                                     ])
                                                     ->schema([
                                                         TextInput::make('label'),
                                                         TextInput::make('value'),
                                                         TextInput::make('icon'),
+                                                        ColorPicker::make('color'),
                                                     ])
                                                     ->minItems(1)
                                                     ->columnSpanFull()
