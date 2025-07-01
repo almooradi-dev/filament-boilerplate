@@ -66,12 +66,20 @@ class PageResource extends Resource
             TableRepeater::make('buttons')
                 ->addActionLabel(__('core.add'))
                 ->headers([
-                    Header::make('button_label')->label('Button Label'),
-                    Header::make('button_link')->label('Button Link'),
+                    Header::make('button_label')->label('Label'),
+                    Header::make('button_link')->label('Link'),
+                    Header::make('button_icon')->label('Icon'),
+                    Header::make('button_type')->label('Type'),
                 ])
                 ->schema([
-                    TextInput::make('button_label'),
-                    TextInput::make('button_link'),
+                    TextInput::make('label'),
+                    TextInput::make('link'),
+                    TextInput::make('icon'),
+                    Select::make('type')
+                        ->options([
+                            'primary' => 'Primary',
+                            'secondary' => 'secondary',
+                        ])
                 ])
                 ->columns(2),
             TextInput::make('quote'),
@@ -193,13 +201,13 @@ class PageResource extends Resource
                                                 TableRepeater::make('items')
                                                     ->addActionLabel(__('core.add'))
                                                     ->headers([
-                                                        Header::make('title'),
-                                                        Header::make('description'),
+                                                        Header::make('label'),
+                                                        Header::make('value'),
                                                         Header::make('icon'),
                                                     ])
                                                     ->schema([
-                                                        TextInput::make('title'),
-                                                        TextInput::make('description'),
+                                                        TextInput::make('label'),
+                                                        TextInput::make('value'),
                                                         TextInput::make('icon'),
                                                     ])
                                                     ->minItems(1)
