@@ -2,8 +2,6 @@
 
 namespace App\Providers;
 
-use App\Models\User;
-use App\Policies\Core\UserPolicy;
 use BezhanSalleh\FilamentShield\Facades\FilamentShield;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
@@ -12,8 +10,9 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use App\Traits\HasTranslations;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 use Exception;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -35,8 +34,10 @@ class AppServiceProvider extends ServiceProvider
                 ->afterLast('\\')
         );
 
-        // Register Policies
-        Gate::policy(User::class, UserPolicy::class);
+        // Register Policies (TODO: Auto register policies lavael base app (core)) (TODO: Add to docs, that policies are auto registered)
+        $this->registerModulePolicies();
+        $this->registerAppPolicies();
+        // Gate::policy(User::class, UserPolicy::class);
 
         // Extend Stringable with a custom method
         Stringable::macro('whenNotContains', function ($needle, $callback, $default = null) {
@@ -110,5 +111,56 @@ class AppServiceProvider extends ServiceProvider
         ];
 
         return isset($_SERVER['argv'][1]) && in_array($_SERVER['argv'][1], $commands);
+    }
+
+    protected function registerModulePolicies()
+    {
+        $modulesPath = base_path('Modules');
+        $modules = File::directories($modulesPath);
+
+        foreach ($modules as $modulePath) {
+            $moduleName = basename($modulePath);
+
+            $modelsPath = $modulePath . '/Models';
+            $policiesPath = $modulePath . '/Policies';
+
+            if (!File::isDirectory($modelsPath) || !File::isDirectory($policiesPath)) {
+                continue;
+            }
+
+            $modelFiles = File::files($modelsPath);
+
+            foreach ($modelFiles as $modelFile) {
+                $modelClass = "Modules\\$moduleName\\Models\\" . $modelFile->getFilenameWithoutExtension();
+                $policyClass = "Modules\\$moduleName\\Policies\\" . $modelFile->getFilenameWithoutExtension() . 'Policy';
+
+                if (class_exists($modelClass) && class_exists($policyClass)) {
+                    Gate::policy($modelClass, $policyClass);
+                }
+            }
+        }
+    }
+
+    protected function registerAppPolicies()
+    {
+        $modelsPath = app_path('Models');
+        $policiesPath = app_path('Policies');
+
+        if (!File::isDirectory($modelsPath) || !File::isDirectory($policiesPath)) {
+            return;
+        }
+
+        $modelFiles = File::allFiles($modelsPath);
+
+        foreach ($modelFiles as $modelFile) {
+            $relativePath = Str::replaceFirst($modelsPath . DIRECTORY_SEPARATOR, '', $modelFile->getPathname());
+            $relativeClass = str_replace([DIRECTORY_SEPARATOR, '.php'], ['\\', ''], $relativePath);
+            $modelClass = "App\\Models\\$relativeClass";
+            $policyClass = "App\\Policies\\$relativeClass" . 'Policy';
+
+            if (class_exists($modelClass) && class_exists($policyClass)) {
+                Gate::policy($modelClass, $policyClass);
+            }
+        }
     }
 }
