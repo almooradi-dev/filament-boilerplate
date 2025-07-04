@@ -127,7 +127,7 @@ class UserResource extends Resource
                     ->searchable(query: fn(Builder $query, string $search) => $query->whereRaw(static::$fullPhoneConcatQuery . ' LIKE ?', ['%' . $search . '%']))
                     ->label(__('core.full_phone')),
                 ColorColumn::make('status.color')
-                    ->text(fn($record) => $record->status->name)
+                    ->text(fn($record) => $record->status?->name)
                     ->label(__('core.color'))
                     ->searchable(query: fn(Builder $query, string $search) => $query->whereHas('status', fn($q) => $q->where('name', 'like', '%' . $search . '%'))),
                 TextColumn::make('roles.name')
