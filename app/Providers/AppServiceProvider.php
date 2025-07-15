@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Traits\HasTranslations;
 use Illuminate\Support\Facades\DB;
 use Exception;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 
@@ -42,6 +43,16 @@ class AppServiceProvider extends ServiceProvider
         // Extend Stringable with a custom method
         Stringable::macro('whenNotContains', function ($needle, $callback, $default = null) {
             return $this->contains($needle) ? (is_callable($default) ? $default($this) : $this) : $callback($this);
+        });
+
+        // Extend Builder with a custom method
+        Builder::macro('whereFalsy', function ($column) {
+            return $this->where(function ($query) use ($column) {
+                $query->whereNull($column)
+                    ->orWhere($column, '')
+                    ->orWhere($column, 0)
+                    ->orWhere($column, false);
+            });
         });
 
         /**
