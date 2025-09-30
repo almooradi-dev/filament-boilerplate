@@ -217,7 +217,49 @@ class PageResource extends Resource
                                                     ->columns(2),
                                             ])
                                             ->columns(2),
-
+                                        // Slider
+                                        Builder\Block::make('slider')
+                                            ->schema([
+                                                Grid::make(3)
+                                                    ->schema([
+                                                        $contentKeyInput,
+                                                        TextInput::make('title')
+                                                            ->required(),
+                                                        TextInput::make('subtitle'),
+                                                    ]),
+                                                TableRepeater::make('slides')
+                                                    ->addActionLabel(__('core.add'))
+                                                    ->headers([
+                                                        Header::make('slide_media')->label('Media')->width('200px'),
+                                                        Header::make('slide_title')->label('Title'),
+                                                        Header::make('slide_description')->label('Description'),
+                                                        Header::make('slide_button')->label('Button'),
+                                                    ])
+                                                    ->schema([
+                                                        FileUpload::make('slide_media') // TODO: Delete removed images
+                                                            ->image()
+                                                            ->imageEditor()
+                                                            ->downloadable()
+                                                            ->directory('pages'),
+                                                        TextInput::make('slide_title'),
+                                                        TextInput::make('slide_description'),
+                                                        // Button
+                                                        Grid::make(2)
+                                                            ->schema([
+                                                                TextInput::make('slide_button_label')->label('Label'),
+                                                                TextInput::make('slide_button_link')->url()->label('Link'),
+                                                                TextInput::make('slide_button_icon')->label('Icon'),
+                                                                Select::make('slide_button_type')
+                                                                    ->options([
+                                                                        'primary' => 'Primary',
+                                                                        'secondary' => 'secondary',
+                                                                    ])
+                                                                    ->label('Type')
+                                                            ]),
+                                                    ])
+                                                    ->columnSpanFull(),
+                                            ])
+                                            ->columns(2),
                                     ])
                                     ->columnSpanFull(),
                             ]),
