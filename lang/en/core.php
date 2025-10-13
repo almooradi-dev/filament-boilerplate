@@ -69,4 +69,5 @@ return [
     'content' => 'Content',
     'the_content' => 'Content',
     'no_data_was_found' => 'No data was found',
+    'notifications' => 'Notifications',
 ];
