@@ -62,29 +62,35 @@ class Notifications extends Page implements HasForms
 
     public function form(Form $form): Form
     {
-        $users = User::whereActive()->get()->mapWithKeys(function ($user) {
-            return [$user->id => $user->full_name];
-        })->toArray(); // TODO: Server search for large number of users
-
         return $form
             ->schema([
                 Toggle::make('send_to_all_users')
                     ->label(new HtmlString('Send to all users? <small style="color: gray">(Active users only)</small>'))
-                    ->default(true)->live(),
+                    ->default(true)
+                    ->live(),
+                // TODO: Add to boilerplate
                 Select::make('receivers')
                     ->searchable()
                     ->multiple()
-                    ->getSearchResultsUsing(function (string $search) use ($users): array {
-                        return collect($users)
-                            ->filter(function ($name) use ($search) {
-                                return str_contains(strtolower($name), strtolower($search));
+                    ->getSearchResultsUsing(function (string $search): array {
+                        return User::query()
+                            ->whereActive()
+                            ->where(function ($query) use ($search) {
+                                $query->where('first_name', 'like', "%{$search}%")
+                                    ->orWhere('last_name', 'like', "%{$search}%")
+                                    ->orWhere('email', 'like', "%{$search}%");
                             })
-                            ->mapWithKeys(function ($name, $id) {
-                                return [$id => $name];
-                            })
+                            ->limit(50)
+                            ->get()
+                            ->mapWithKeys(fn($user) => [
+                                $user->id => "{$user->full_name} ({$user->email})"
+                            ])
                             ->toArray();
                     })
-                    ->getOptionLabelUsing(fn($value): ?string => $users[$value])
+                    ->getOptionLabelUsing(function ($value): ?string {
+                        $user = User::find($value);
+                        return $user ? "{$user->full_name} ({$user->email})" : null;
+                    })
                     ->optionsLimit(50)
                     ->visible(fn(Get $get) => !$get('send_to_all_users')),
                 Grid::make(2)
@@ -150,8 +156,8 @@ class Notifications extends Page implements HasForms
             ->send();
     }
 
-    // public static function canAccess(): bool
-    // {
-    //     return auth()->user()->can('notification.send');
-    // }
+    public static function canAccess(): bool
+    {
+        return auth()->user()->can('notification.send');
+    }
 }
