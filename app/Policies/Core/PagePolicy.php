@@ -1,65 +1,70 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Policies\Core;
 
+use Illuminate\Foundation\Auth\User as AuthUser;
 use App\Models\Core\Page;
-use App\Models\User;
+use Illuminate\Auth\Access\HandlesAuthorization;
 
 class PagePolicy
 {
-    /**
-     * Determine whether the user can view any models.
-     */
-    public function viewAny(User $user): bool
+    use HandlesAuthorization;
+    
+    public function viewAny(AuthUser $authUser): bool
     {
-        return $user->hasPermissionTo('viewAny_Page');
+        return $authUser->can('view_any::page');
     }
 
-    /**
-     * Determine whether the user can view the model.
-     */
-    public function view(User $user, Page $model): bool
+    public function view(AuthUser $authUser, Page $page): bool
     {
-        return $user->hasPermissionTo('view_Page');
+        return $authUser->can('view::page');
     }
 
-    /**
-     * Determine whether the user can create models.
-     */
-    public function create(User $user): bool
+    public function create(AuthUser $authUser): bool
     {
-        return $user->hasPermissionTo('create_Page');
+        return $authUser->can('create::page');
     }
 
-    /**
-     * Determine whether the user can update the model.
-     */
-    public function update(User $user, Page $model): bool
+    public function update(AuthUser $authUser, Page $page): bool
     {
-        return $user->hasPermissionTo('update_Page');
+        return $authUser->can('update::page');
     }
 
-    /**
-     * Determine whether the user can delete the model.
-     */
-    public function delete(User $user, Page $model): bool
+    public function delete(AuthUser $authUser, Page $page): bool
     {
-        return $user->hasPermissionTo('delete_Page');
+        return $authUser->can('delete::page');
     }
 
-    /**
-     * Determine whether the user can restore the model.
-     */
-    public function restore(User $user, Page $model): bool
+    public function restore(AuthUser $authUser, Page $page): bool
     {
-        return $user->hasPermissionTo('restore_Page');
+        return $authUser->can('restore::page');
     }
 
-    /**
-     * Determine whether the user can permanently delete the model.
-     */
-    public function forceDelete(User $user, Page $model): bool
+    public function forceDelete(AuthUser $authUser, Page $page): bool
     {
-        return $user->hasPermissionTo('forceDelete_Page');
+        return $authUser->can('force_delete::page');
     }
+
+    public function forceDeleteAny(AuthUser $authUser): bool
+    {
+        return $authUser->can('force_delete_any::page');
+    }
+
+    public function restoreAny(AuthUser $authUser): bool
+    {
+        return $authUser->can('restore_any::page');
+    }
+
+    public function replicate(AuthUser $authUser, Page $page): bool
+    {
+        return $authUser->can('replicate::page');
+    }
+
+    public function reorder(AuthUser $authUser): bool
+    {
+        return $authUser->can('reorder::page');
+    }
+
 }

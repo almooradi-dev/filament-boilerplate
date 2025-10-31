@@ -11,6 +11,9 @@ use Illuminate\Database\Eloquent\Model;
 use App\Traits\HasTranslations;
 use Illuminate\Support\Facades\DB;
 use Exception;
+use Filament\Pages\Page;
+use Filament\Resources\Resource;
+use Filament\Widgets\Widget;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
@@ -30,21 +33,45 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        // FilamentShield::buildPermissionKeyUsing(
+        //     function (string $entity, string $affix, string $subject, string $case, string $separator) {
+        //         if (is_subclass_of($entity, \Filament\Resources\Resource::class)) {
+        //             return str($affix)
+        //                 ->snake()
+        //                 ->append('_')
+        //                 ->append(
+        //                     str($entity::getModel())
+        //                         ->afterLast('\\')
+        //                         ->snake()
+        //                 )
+        //                 ->toString();
+        //         }
+
+        //         return null;
+        //     }
+        // );
         FilamentShield::buildPermissionKeyUsing(
             function (string $entity, string $affix, string $subject, string $case, string $separator) {
-                if (is_subclass_of($entity, \Filament\Resources\Resource::class)) {
-                    return str($affix)
+                return match (true) {
+                    is_subclass_of($entity, Resource::class) => Str::of($affix)
                         ->snake()
-                        ->append('_')
+                        ->append('::')
                         ->append(
-                            str($entity::getModel())
+                            Str::of($entity)
                                 ->afterLast('\\')
+                                ->beforeLast('Resource')
+                                ->replace('\\', '')
                                 ->snake()
+                                // ->replace('_', '::')
                         )
-                        ->toString();
-                }
-
-                return null;
+                        ->toString(),
+                    is_subclass_of($entity, Page::class) => Str::of('page_')
+                        ->append(class_basename($entity))
+                        ->toString(),
+                    is_subclass_of($entity, Widget::class) => Str::of('widget_')
+                        ->append(class_basename($entity))
+                        ->toString()
+                };
             }
         );
 

@@ -155,9 +155,4 @@ class Notifications extends Page implements HasForms
             ->success()
             ->send();
     }
-
-    public static function canAccess(): bool
-    {
-        return auth()->user()->can('notification.send');
-    }
 }

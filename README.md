@@ -123,6 +123,10 @@ vendor/bin/filament-v4
     ```bash
     composer update
     ```
+- Re-run the command below to re-generate permisions in the new pattern
+    ```bash
+    php artisan shield:generate --all --panel=admin
+    ```
 
 ## Errors
 - **Object of class BezhanSalleh\FilamentShield\Support\ShieldConfig could not be converted to string**
