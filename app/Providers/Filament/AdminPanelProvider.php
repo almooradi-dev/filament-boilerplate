@@ -10,7 +10,6 @@ use Filament\Pages;
 use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
-use Filament\Support\Enums\MaxWidth;
 use Filament\Widgets;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
@@ -18,7 +17,7 @@ use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
-use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Illuminate\View\Middleware\ShareErrorsFromSession;;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -36,7 +35,7 @@ class AdminPanelProvider extends PanelProvider
                 'primary' => Color::Pink,
             ])
             ->sidebarCollapsibleOnDesktop()
-            ->maxContentWidth(MaxWidth::Full)
+            // ->maxContentWidth(MaxWidth::Full)
             // ->viteTheme('resources/css/filament/admin/theme-01.css')
             // ->viteTheme('resources/css/filament/admin/theme-02.css')
 
@@ -74,7 +73,7 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->plugins([
                 \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make(),
-                \Filament\SpatieLaravelTranslatablePlugin::make()
+                \LaraZeus\SpatieTranslatable\SpatieTranslatablePlugin::make()
                     ->defaultLocales(['en', 'ar']),
                 \Coolsam\Modules\ModulesPlugin::make()
             ]);

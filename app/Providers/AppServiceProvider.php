@@ -30,9 +30,22 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        FilamentShield::configurePermissionIdentifierUsing(
-            fn($resource) => str($resource::getModel())
-                ->afterLast('\\')
+        FilamentShield::buildPermissionKeyUsing(
+            function (string $entity, string $affix, string $subject, string $case, string $separator) {
+                if (is_subclass_of($entity, \Filament\Resources\Resource::class)) {
+                    return str($affix)
+                        ->snake()
+                        ->append('_')
+                        ->append(
+                            str($entity::getModel())
+                                ->afterLast('\\')
+                                ->snake()
+                        )
+                        ->toString();
+                }
+
+                return null;
+            }
         );
 
         // Register Policies (TODO: Auto register policies lavael base app (core)) (TODO: Add to docs, that policies are auto registered)

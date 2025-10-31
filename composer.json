@@ -7,13 +7,12 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
-        "awcodes/filament-table-repeater": "^3.1",
-        "bezhansalleh/filament-shield": "^3.3",
-        "coolsam/modules": "^4.2",
-        "filament/filament": "^3.3.26",
-        "filament/spatie-laravel-settings-plugin": "^3.2",
-        "filament/spatie-laravel-translatable-plugin": "^3.2",
+        "bezhansalleh/filament-shield": "^4.0",
+        "coolsam/modules": "^5.0",
+        "filament/filament": "^4.0",
+        "filament/spatie-laravel-settings-plugin": "^4.0",
         "kreait/laravel-firebase": "^6.1.0",
+        "lara-zeus/spatie-translatable": "^1.0",
         "laravel/framework": "^12.0",
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.9"
@@ -21,6 +20,7 @@
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.14",
         "fakerphp/faker": "^1.23",
+        "filament/upgrade": "^4.0",
         "laravel/pail": "^1.1",
         "laravel/pint": "^1.13",
         "laravel/sail": "^1.26",

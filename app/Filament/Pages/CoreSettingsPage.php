@@ -3,17 +3,19 @@
 namespace App\Filament\Pages;
 
 use App\Settings\CoreSettings;
+use BackedEnum;
 use Filament\Forms;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Pages\SettingsPage;
 use Filament\Resources\Pages\EditRecord\Concerns\Translatable;
+use Filament\Schemas\Schema;
 use Illuminate\Contracts\Support\Htmlable;
 
 class CoreSettingsPage extends SettingsPage
 {
-    protected static ?string $navigationIcon = 'heroicon-o-cog-6-tooth';
+    protected static BackedEnum|string|null $navigationIcon = 'heroicon-o-cog-6-tooth';
 
     protected static string $settings = CoreSettings::class;
 
@@ -32,10 +34,10 @@ class CoreSettingsPage extends SettingsPage
         return __('core.settings');
     }
 
-    public function form(Form $form): Form
+    public function schema(Schema $schema): Schema
     {
-        return $form
-            ->schema([
+        return $schema
+            ->components([
                 TextInput::make('app_name')
                     ->required(),
                 FileUpload::make('logo_light')

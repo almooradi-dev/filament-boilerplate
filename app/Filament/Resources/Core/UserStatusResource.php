@@ -5,13 +5,13 @@ namespace App\Filament\Resources\Core;
 use App\Filament\Resources\Core\UserStatusResource\Pages;
 use App\Models\Core\UserStatus;
 use App\Tables\Columns\ColorColumn;
+use BackedEnum;
 use Filament\Forms\Components\ColorPicker;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
-use Filament\Forms\Form;
 use Filament\Forms\Set;
-use Filament\Resources\Concerns\Translatable;
 use Filament\Resources\Resource;
+use Filament\Schemas\Schema;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ToggleColumn;
@@ -19,6 +19,7 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Str;
+use LaraZeus\SpatieTranslatable\Resources\Concerns\Translatable;
 
 class UserStatusResource extends Resource
 {
@@ -26,7 +27,7 @@ class UserStatusResource extends Resource
 
     protected static ?string $model = UserStatus::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-tag';
+    protected static BackedEnum|string|null $navigationIcon = 'heroicon-o-tag';
 
     public static function getNavigationGroup(): ?string
     {
@@ -43,10 +44,10 @@ class UserStatusResource extends Resource
         return __('core.user_statuses');
     }
 
-    public static function form(Form $form): Form
+    public static function schema(Schema $schema): Schema
     {
-        return $form
-            ->schema([
+        return $schema
+            ->components([
                 TextInput::make('name')
                     ->label(__('core.name'))
                     ->live(onBlur: true)

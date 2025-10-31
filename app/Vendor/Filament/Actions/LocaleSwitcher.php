@@ -3,7 +3,7 @@
 namespace App\Vendor\Filament\Actions;
 
 use Closure;
-use Filament\Actions\LocaleSwitcher as ActionsLocaleSwitcher;
+use LaraZeus\SpatieTranslatable\Actions\LocaleSwitcher as ActionsLocaleSwitcher;
 
 class LocaleSwitcher extends ActionsLocaleSwitcher
 {

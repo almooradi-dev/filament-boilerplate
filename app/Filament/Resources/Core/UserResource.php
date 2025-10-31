@@ -6,13 +6,15 @@ use App\Filament\Resources\Core\UserResource\Pages;
 use App\Models\Core\UserStatus;
 use App\Models\User;
 use App\Tables\Columns\ColorColumn;
-use Filament\Forms\Components\FileUpload;
+use BackedEnum;
+use Filament\Forms\ComponentsileUpload;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Forms\Get;
 use Filament\Resources\Resource;
+use Filament\Schemas\Schema;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
@@ -26,7 +28,7 @@ class UserResource extends Resource
 {
     protected static ?string $model = User::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-users';
+    protected static BackedEnum|string|null $navigationIcon = 'heroicon-o-users';
 
     protected static string $fullPhoneConcatQuery = "CONCAT(country_code, '-', phone)";
 
@@ -45,10 +47,10 @@ class UserResource extends Resource
         return __('core.users');
     }
 
-    public static function form(Form $form): Form
+    public static function schema(Schema $schema): Schema
     {
-        return $form
-            ->schema([
+        return $schema
+            ->components([
                 Grid::make('name')
                     ->schema([
                         TextInput::make('first_name')

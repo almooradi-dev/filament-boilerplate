@@ -4,18 +4,19 @@ namespace App\Filament\Pages;
 
 use App\Mail\GeneralEmail;
 use App\Models\User;
-use Filament\Forms\Components\Grid;
+use BackedEnum;
+use Filament\Forms\Components\Toggle;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Toggle;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
-use Filament\Forms\Form;
-use Filament\Forms\Get;
 use Filament\Notifications\Notification;
 use Filament\Pages\Page;
+use Filament\Schemas\Components\Grid;
+use Filament\Schemas\Components\Utilities\Get;
+use Filament\Schemas\Schema;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\HtmlString;
@@ -24,9 +25,9 @@ class Notifications extends Page implements HasForms
 {
     use InteractsWithForms;
 
-    protected static string $view = 'filament.pages.notifications';
+    protected string $view = 'filament.pages.notifications';
 
-    protected static ?string $navigationIcon = 'heroicon-o-bell';
+    protected static BackedEnum|string|null $navigationIcon = 'heroicon-o-bell';
 
     public static function getNavigationGroup(): ?string
     {
@@ -60,14 +61,14 @@ class Notifications extends Page implements HasForms
         ]);
     }
 
-    public function form(Form $form): Form
+    public function schema(Schema $schema): Schema
     {
         $users = User::whereActive()->get()->mapWithKeys(function ($user) {
             return [$user->id => $user->full_name];
         })->toArray(); // TODO: Server search for large number of users
 
-        return $form
-            ->schema([
+        return $schema
+            ->components([
                 Toggle::make('send_to_all_users')
                     ->label(new HtmlString('Send to all users? <small style="color: gray">(Active users only)</small>'))
                     ->default(true)->live(),

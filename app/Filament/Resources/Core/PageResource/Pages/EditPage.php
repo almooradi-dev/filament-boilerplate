@@ -6,10 +6,11 @@ use App\Filament\Resources\Core\PageResource;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
 use App\Vendor\Filament\Actions\LocaleSwitcher;
+use LaraZeus\SpatieTranslatable\Resources\Pages\EditRecord\Concerns\Translatable;
 
 class EditPage extends EditRecord
 {
-    use EditRecord\Concerns\Translatable;
+    use Translatable;
 
     protected static string $resource = PageResource::class;
 

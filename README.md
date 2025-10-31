@@ -92,6 +92,74 @@ php artisan module:make-model ChallengeJudgingFormQuestion ChallengeJudging -m
 # Helpful Links
 - [https://github.com/filamentphp/filament/discussions/9012#discussioncomment-7246013](https://github.com/filamentphp/filament/discussions/9012#discussioncomment-7246013)
 
+# Upgrade from v3 to v4
+```bash
+composer require filament/upgrade:"^4.0" -W --dev
+```
+
+```bash
+vendor/bin/filament-v4
+```
+
+## Packages
+- Run
+    ```bash
+    composer require filament/filament:"^4.0" -W --no-update
+    composer require filament/spatie-laravel-settings-plugin:"^4.0" -W --no-update
+    composer remove filament/spatie-laravel-translatable-plugin -W --no-update
+    composer require lara-zeus/spatie-translatable -W --no-update
+    composer require bezhansalleh/filament-shield:"^4.0" -W --no-update
+    composer require coolsam/modules:"^5.0" -W --no-update
+    ```
+
+- Remove `awcodes/filament-table-repeater` from `composer.json`, temporarily
+
+- Replace `use Filament\Forms\Get;` with `use Filament\Schemas\Components\Utilities\Get;`
+- Replace `use Filament\Forms\Set;` with `use Filament\Schemas\Components\Utilities\Set;`
+- Replace `\Filament\SpatieLaravelTranslatablePlugin::make()` with `\LaraZeus\SpatieTranslatable\SpatieTranslatablePlugin::make()`
+- Replace `protected static string $view` with `protected string $view`
+
+- And then run
+    ```bash
+    composer update
+    ```
+
+## Errors
+- **Object of class BezhanSalleh\FilamentShield\Support\ShieldConfig could not be converted to string**
+    Delete `config/filament-shield.php` and re-publish it later using:
+    ```bash
+    php artisan vendor:publish --tag="filament-shield-config"
+    ```
+- **Class "Filament\Support\Enums\MaxWidth" not found at app/Providers/Filament/AdminPanelProvider.php:39**
+    - Remove `use Filament\Support\Enums\MaxWidth;`
+    - Comment `->maxContentWidth(MaxWidth::Full)`
+
+- **Trait "Filament\Resources\Concerns\Translatable" not found**
+    - Replace `use Filament\Resources\Concerns\Translatable;` with `use LaraZeus\SpatieTranslatable\Resources\Concerns\Translatable;`
+    - Replace the Trait `use CreateRecord\Concerns\Translatable` with `use Translatable` only, and import using `use LaraZeus\SpatieTranslatable\Resources\Pages\CreateRecord\Concerns\Translatable;`
+    - Replace the Trait `use EditRecord\Concerns\Translatable` with `use Translatable` only, and import using `use LaraZeus\SpatieTranslatable\Resources\Pages\EditRecord\Concerns\Translatable;`
+    - Replace the Trait `use ListRecords\Concerns\Translatable` with `use Translatable` only, and import using `use LaraZeus\SpatieTranslatable\Resources\Pages\ListRecords\Concerns\Translatable;`
+
+- **Type of App\Filament\Resources\Core\PageResource::$navigationIcon must be BackedEnum|string|null (as in class Filament\Resources\Resource)**
+    - Replace `protected static ?string $navigationIcon` with `protected static BackedEnum|string|null $navigationIcon`
+    - Don't forget to import `BackedEnum` using `use BackedEnum;`
+
+- **Could not check compatibility between Class\Path::form(Filament\Forms\Form $form): Filament\Forms\Form and Filament\Resources\Resource::form(Filament\Schemas\Schema $schema): Filament\Schemas\Schema, because class Filament\Forms\Form is not available**
+    - Replace `function form(Form $form): Form` with `function schema(Schema $schema): Schema`
+    - Don't forget to import `Schema` using `use Filament\Schemas\Schema;`
+    - Replace 
+        ```php
+        return $form
+            ->schema
+        ```
+        With
+        ```php
+        return $schema
+            ->components
+        ```
+    - Replace `use Filament\Forms\Components\Grid` with `use Filament\Schemas\Components\Grid`
+- 
+
 # Fork??
 **Clone the boilerplate repo**
 ```bash

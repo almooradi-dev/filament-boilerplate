@@ -6,7 +6,8 @@ use App\Filament\Resources\Core\PageResource\Pages;
 use App\Models\Core\Page;
 use Awcodes\TableRepeater\Components\TableRepeater;
 use Awcodes\TableRepeater\Header;
-use Filament\Forms\Components\Builder;
+use BackedEnum;
+use Filament\Forms\Componentsuilder;
 use Filament\Forms\Components\ColorPicker;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Grid;
@@ -16,13 +17,13 @@ use Filament\Forms\Components\Tabs\Tab;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
-use Filament\Forms\Form;
-use Filament\Resources\Concerns\Translatable;
 use Filament\Resources\Resource;
+use Filament\Schemas\Schema;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Table;
+use LaraZeus\SpatieTranslatable\Resources\Concerns\Translatable;
 
 class PageResource extends Resource
 {
@@ -30,7 +31,7 @@ class PageResource extends Resource
 
     protected static ?string $model = Page::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-document-duplicate';
+    protected static BackedEnum|string|null $navigationIcon = 'heroicon-o-document-duplicate';
 
     protected static ?int $navigationSort = 5;
 
@@ -49,7 +50,7 @@ class PageResource extends Resource
         return __('core.the_pages');
     }
 
-    public static function form(Form $form): Form
+    public static function schema(Schema $schema): Schema
     {
         $contentKeyInput = TextInput::make('key')
             ->required()
@@ -86,8 +87,8 @@ class PageResource extends Resource
             TextInput::make('quote_author'),
         ];
 
-        return $form
-            ->schema([
+        return $schema
+            ->components([
                 Tabs::make()
                     ->tabs([
                         Tab::make('General')
