@@ -37,6 +37,17 @@ php artisan key:generate
 DEBUGBAR_ENABLED=false # Add to .env
 ```
 
+**Queue** (if needed)
+```bash
+nohup php artisan queue:listen --timeout=600 > /dev/null 2>&1 &
+
+# Check if we have any old running queue commands
+ps aux | grep '[p]hp artisan queue:work'
+=> Output should include: falakey   406024 65.5  2.1 321936 175168 pts/4   R    20:42   0:04 `php artisan queue:work --timeout=600 --daemon`
+```
+
+Used to generate spatie media conversions and responsive images
+
 **Scheduler** (if needed)
 ```bash
 * * * * * cd /path-to-your-project && php artisan schedule:run >> /dev/null 2>&1
