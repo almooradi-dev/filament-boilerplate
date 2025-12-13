@@ -53,6 +53,17 @@ Used to generate spatie media conversions and responsive images
 * * * * * cd /path-to-your-project && php artisan schedule:run >> /dev/null 2>&1
 ```
 
+# Theme
+
+1. First we need t install and build `npm`
+    ```bash
+    npm install
+    ```
+    ```bash
+    npm run build
+    ```
+2. Then you can choose a theme from `app/Providers/Filament/AdminPanelProvider.php` by uncommenting one of the `->viteTheme` options
+
 # Optimizing Filament for production
 
 ```bash
@@ -73,6 +84,16 @@ Examples:
 - viewAny_User
 - create_UserType
 - forceDeleteAny_PostCategory
+
+# Basics
+- Create a model in a sub-directory
+    ```bash
+    php artisan make:model SubDirectory\\Product
+    ```
+- Create a resource
+    ```bash
+    php artisan make:filament-resource SubDirectory\\Product
+    ```
 
 # Modules
 - [https://nwidart.com/laravel-modules/v6/introduction](https://nwidart.com/laravel-modules/v6/introduction)
@@ -99,6 +120,16 @@ php artisan module:make-model ChallengeJudgingFormQuestion ChallengeJudging -m
     },
     ```
     Then run `composer dump-autoload`
+
+# Filament Stubs
+- Generate
+    ```bash
+    php artisan vendor:publish --tag=filament-stubs
+    ```
+- Check difference (to check major updates/edits)
+    ```bash
+    diff -ru vendor/filament/filament/stubs stubs/filament
+    ```
 
 # Helpful Links
 - [https://github.com/filamentphp/filament/discussions/9012#discussioncomment-7246013](https://github.com/filamentphp/filament/discussions/9012#discussioncomment-7246013)
