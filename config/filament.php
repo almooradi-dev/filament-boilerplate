@@ -2,7 +2,7 @@
 
 return [
     'localization' => [
-        'enabled' => false,
-        'show_locale_switcher' => true,
+        'enabled' => true,
+        'show_locale_switcher' => false,
     ],
 ];
