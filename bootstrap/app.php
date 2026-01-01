@@ -12,7 +12,13 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        //
+        $middleware->alias([
+            'sanctum-optional' => App\Http\Middleware\Core\Auth\OptionalAuthSanctum::class,
+        ]);
+
+        $middleware->api(prepend: [
+            \App\Http\Middleware\Core\SetLocale::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //
