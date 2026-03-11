@@ -61,7 +61,7 @@ class Notifications extends Page implements HasForms
         ]);
     }
 
-    function schema(Schema $schema): Schema
+    function form(Schema $schema): Schema
     {
         return $schema
             ->schema([
@@ -107,17 +107,17 @@ class Notifications extends Page implements HasForms
                             ->required()
                             ->visible(fn(Get $get) => $get('type') == 'email'),
                     ]),
-                Grid::make('title')
+                Grid::make(1)
                     ->schema([
                         TextInput::make('title_en')->label('Title')->required(),
                         // TextInput::make('title_ar')->label('Title (AR)')->required(),
-                    ])->columns(1),
-                Grid::make('body')
+                    ]),
+                Grid::make(1)
                     ->schema([
                         RichEditor::make('body_en')->label('Body')->required(), // TODO: Change the uploaded files directory 
                         // Textarea::make('body_en')->label('Body (EN)')->rows(10)->requiredWith('body_ar'),
                         // Textarea::make('body_ar')->label('Body (AR)')->rows(10)->requiredWith('body_en'),
-                    ])->columns(1),
+                    ]),
             ])
             ->statePath('data');
     }

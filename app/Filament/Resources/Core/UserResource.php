@@ -6,7 +6,6 @@ use App\Filament\Resources\Core\UserResource\Pages;
 use App\Models\User;
 use App\Tables\Columns\ColorColumn;
 use BackedEnum;
-use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Get;
@@ -21,6 +20,8 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Validation\Rules\Unique;
 use Illuminate\Support\Facades\Hash;
 use Filament;
+use Filament\Forms\Components\FileUpload;
+use Filament\Schemas\Components\Grid;
 
 class UserResource extends Resource
 {
@@ -45,11 +46,11 @@ class UserResource extends Resource
         return __('core.users');
     }
 
-    public static function schema(Schema $schema): Schema
+    public static function form(Schema $schema): Schema
     {
         return $schema
             ->components([
-                Grid::make('name')
+                Grid::make(1)
                     ->schema([
                         TextInput::make('first_name')
                             ->label(__('core.first_name'))
@@ -58,7 +59,7 @@ class UserResource extends Resource
                         TextInput::make('last_name')
                             ->label(__('core.last_name'))
                             ->maxLength(125),
-                    ])->columns(2),
+                    ]),
                 TextInput::make('email')
                     ->label(__('core.email'))
                     ->unique(ignoreRecord: true)

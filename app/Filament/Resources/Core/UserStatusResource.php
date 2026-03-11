@@ -45,7 +45,7 @@ class UserStatusResource extends Resource
         return __('core.user_statuses');
     }
 
-    public static function schema(Schema $schema): Schema
+    public static function form(Schema $schema): Schema
     {
         return $schema
             ->components([

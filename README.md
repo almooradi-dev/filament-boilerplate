@@ -199,7 +199,7 @@ vendor/bin/filament-v4
     - Don't forget to import `BackedEnum` using `use BackedEnum;`
 
 - **Could not check compatibility between Class\Path::form(Filament\Forms\Form $form): Filament\Forms\Form and Filament\Resources\Resource::form(Filament\Schemas\Schema $schema): Filament\Schemas\Schema, because class Filament\Forms\Form is not available**
-    - Replace `function form(Form $form): Form` with `function schema(Schema $schema): Schema`
+    - Replace `function form(Form $form): Form` with `function form(Schema $schema): Schema`
     - Don't forget to import `Schema` using `use Filament\Schemas\Schema;`
     - Replace 
         ```php

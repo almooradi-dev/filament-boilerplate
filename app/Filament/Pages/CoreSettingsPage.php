@@ -35,7 +35,7 @@ class CoreSettingsPage extends SettingsPage implements HasForms
         return __('core.settings');
     }
 
-    public function schema(Schema $schema): Schema
+    public function form(Schema $schema): Schema
     {
         return $schema
             ->components([

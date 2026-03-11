@@ -49,7 +49,7 @@ class PageResource extends Resource
         return __('core.the_pages');
     }
 
-    public static function schema(Schema $schema): Schema
+    public static function form(Schema $schema): Schema
     {
         $contentKeyInput = TextInput::make('key')
             ->required()
