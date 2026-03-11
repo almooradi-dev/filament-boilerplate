@@ -3,15 +3,12 @@
 namespace App\Filament\Resources\Core;
 
 use App\Filament\Resources\Core\UserResource\Pages;
-use App\Models\Core\UserStatus;
 use App\Models\User;
 use App\Tables\Columns\ColorColumn;
 use BackedEnum;
-use Filament\Forms\ComponentsileUpload;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Form;
 use Filament\Forms\Get;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
@@ -23,6 +20,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Validation\Rules\Unique;
 use Illuminate\Support\Facades\Hash;
+use Filament;
 
 class UserResource extends Resource
 {
@@ -141,13 +139,13 @@ class UserResource extends Resource
                 Tables\Filters\TrashedFilter::make(),
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Filament\Actions\EditAction::make(),
             ])
             ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                    Tables\Actions\ForceDeleteBulkAction::make(),
-                    Tables\Actions\RestoreBulkAction::make(),
+                Filament\Actions\BulkActionGroup::make([
+                    Filament\Actions\DeleteBulkAction::make(),
+                    Filament\Actions\ForceDeleteBulkAction::make(),
+                    Filament\Actions\RestoreBulkAction::make(),
                 ]),
             ]);
     }

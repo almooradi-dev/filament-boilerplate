@@ -170,6 +170,13 @@ vendor/bin/filament-v4
     ```bash
     php artisan shield:generate --all --panel=admin
     ```
+- Install Tailwind v4
+    ```bash
+    npm install tailwindcss@latest @tailwindcss/vite @tailwindcss/forms @tailwindcss/typography --save-dev
+    ```
+    ```bash
+    npm uninstall postcss-nesting
+    ```
 
 ## Errors
 - **Object of class BezhanSalleh\FilamentShield\Support\ShieldConfig could not be converted to string**
@@ -205,6 +212,7 @@ vendor/bin/filament-v4
             ->components
         ```
     - Replace `use Filament\Forms\Components\Grid` with `use Filament\Schemas\Components\Grid`
+    - Replace `use Filament\Forms\Components\Tabs` with `use Filament\Schemas\Components\Tabs`
 - 
 
 # Fork??

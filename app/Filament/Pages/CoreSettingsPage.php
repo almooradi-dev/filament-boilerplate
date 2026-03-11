@@ -4,17 +4,18 @@ namespace App\Filament\Pages;
 
 use App\Settings\CoreSettings;
 use BackedEnum;
-use Filament\Forms;
+use BezhanSalleh\FilamentShield\Traits\HasPageShield;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Form;
+use Filament\Forms\Contracts\HasForms;
 use Filament\Pages\SettingsPage;
-use Filament\Resources\Pages\EditRecord\Concerns\Translatable;
 use Filament\Schemas\Schema;
 use Illuminate\Contracts\Support\Htmlable;
 
-class CoreSettingsPage extends SettingsPage
+class CoreSettingsPage extends SettingsPage implements HasForms
 {
+    use HasPageShield;
+
     protected static BackedEnum|string|null $navigationIcon = 'heroicon-o-cog-6-tooth';
 
     protected static string $settings = CoreSettings::class;

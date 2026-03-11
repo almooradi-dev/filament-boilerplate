@@ -3,9 +3,9 @@
 namespace App\Tables\Columns;
 
 use Closure;
+use Filament\Support\Concerns\CanBeCopied;
+use Filament\Support\Concerns\CanWrap;
 use Filament\Tables\Columns\Column;
-use Filament\Tables\Columns\Concerns\CanBeCopied;
-use Filament\Tables\Columns\Concerns\CanWrap;
 
 class ColorColumn extends Column
 {

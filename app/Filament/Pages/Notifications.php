@@ -5,11 +5,11 @@ namespace App\Filament\Pages;
 use App\Mail\GeneralEmail;
 use App\Models\User;
 use BackedEnum;
-use Filament\Forms\Components\Toggle;
+use BezhanSalleh\FilamentShield\Traits\HasPageShield;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
-use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Notifications\Notification;
@@ -23,7 +23,7 @@ use Illuminate\Support\HtmlString;
 
 class Notifications extends Page implements HasForms
 {
-    use InteractsWithForms;
+    use InteractsWithForms, HasPageShield;
 
     protected string $view = 'filament.pages.notifications';
 
@@ -61,14 +61,15 @@ class Notifications extends Page implements HasForms
         ]);
     }
 
-    public function schema(Schema $schema): Schema
+    function schema(Schema $schema): Schema
     {
         return $schema
-            ->components([
+            ->schema([
                 Toggle::make('send_to_all_users')
                     ->label(new HtmlString('Send to all users? <small style="color: gray">(Active users only)</small>'))
                     ->default(true)
                     ->live(),
+                // TODO: Add to boilerplate
                 Select::make('receivers')
                     ->searchable()
                     ->multiple()

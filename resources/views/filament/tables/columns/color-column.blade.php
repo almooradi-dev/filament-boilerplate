@@ -35,10 +35,10 @@
                     'text-xs',
                     'leading-6',
                     'px-3' => $text !== null,
-                    'w-auto' => $text !== null
+                    'w-auto' => $text !== null,
                 ]) @style([
                     'background-color: ' . e($state) => $state,
-                    'color: ' . $getTextColor() 
+                    'color: ' . $getTextColor(),
                 ])>
                 @if ($text !== null)
                     <span>{{ $text }}</span>
@@ -46,8 +46,8 @@
             </div>
         @endforeach
     @elseif (($placeholder = $getPlaceholder()) !== null)
-        <x-filament-tables::columns.placeholder>
+        <span class="text-sm w-full block leading-6 text-gray-400 dark:text-gray-500 px-3 py-4">
             {{ $placeholder }}
-        </x-filament-tables::columns.placeholder>
+        </span>
     @endif
 </div>
