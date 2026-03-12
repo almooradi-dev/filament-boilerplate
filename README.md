@@ -155,7 +155,7 @@ vendor/bin/filament-v4
     composer require coolsam/modules:"^5.0" -W --no-update
     ```
 
-- Remove `awcodes/filament-table-repeater` from `composer.json`, temporarily
+- Remove `awcodes/filament-table-repeater` from `composer.json`, now it is built into Filament, check this https://filamentphp.com/docs/4.x/forms/repeater#table-repeaters
 
 - Replace `use Filament\Forms\Get;` with `use Filament\Schemas\Components\Utilities\Get;`
 - Replace `use Filament\Forms\Set;` with `use Filament\Schemas\Components\Utilities\Set;`
@@ -213,7 +213,10 @@ vendor/bin/filament-v4
         ```
     - Replace `use Filament\Forms\Components\Grid` with `use Filament\Schemas\Components\Grid`
     - Replace `use Filament\Forms\Components\Tabs` with `use Filament\Schemas\Components\Tabs`
-- 
+
+# Upgrade from v4 to v5
+Check this https://filamentphp.com/docs/5.x/upgrade-guide
+
 
 # Fork??
 **Clone the boilerplate repo**

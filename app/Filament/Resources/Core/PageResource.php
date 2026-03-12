@@ -4,12 +4,10 @@ namespace App\Filament\Resources\Core;
 
 use App\Filament\Resources\Core\PageResource\Pages;
 use App\Models\Core\Page;
-use Awcodes\TableRepeater\Components\TableRepeater;
-use Awcodes\TableRepeater\Header;
 use BackedEnum;
 use Filament\Forms\Components\ColorPicker;
 use Filament\Forms\Components\FileUpload;
-use Filament\Forms\Components\Grid;
+use Filament\Schemas\Components\Grid;
 use Filament\Forms\Components\Select;
 use Filament\Schemas\Components\Tabs;
 use Filament\Schemas\Components\Tabs\Tab;
@@ -19,6 +17,9 @@ use Filament\Forms\Components\Toggle;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament;
+use Filament\Forms\Components\Builder;
+use Filament\Forms\Components\Repeater;
+use Filament\Forms\Components\Repeater\TableColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Table;
@@ -63,13 +64,13 @@ class PageResource extends Resource
                     TextInput::make('subtitle'),
                 ]),
             Textarea::make('description'),
-            TableRepeater::make('buttons')
+            Repeater::make('buttons')
                 ->addActionLabel(__('core.add'))
-                ->headers([
-                    Header::make('button_label')->label('Label'),
-                    Header::make('button_link')->label('Link'),
-                    Header::make('button_icon')->label('Icon'),
-                    Header::make('button_type')->label('Type'),
+                ->table([
+                    TableColumn::make('Label'),
+                    TableColumn::make('Link'),
+                    TableColumn::make('Icon'),
+                    TableColumn::make('Type'),
                 ])
                 ->schema([
                     TextInput::make('label'),
@@ -151,21 +152,19 @@ class PageResource extends Resource
                                                     ]),
                                                 TextInput::make('description')
                                                     ->columnSpanFull(),
-                                                TableRepeater::make('items')
+                                                Repeater::make('items')
                                                     ->label('')
                                                     ->addActionLabel(__('core.add'))
-                                                    ->headers([
-                                                        Header::make('label'),
-                                                        Header::make('value'),
-                                                        Header::make('icon')->width('200px'),
-                                                        Header::make('color')->width('150px'),
+                                                    ->table([
+                                                        TableColumn::make('Label'),
+                                                        TableColumn::make('Value'),
+                                                        TableColumn::make('Icon')->width('200px'),
+                                                        TableColumn::make('Color')->width('150px'),
                                                     ])
                                                     ->schema([
                                                         TextInput::make('label')
-                                                            ->label('Label')
                                                             ->required(),
                                                         TextInput::make('value')
-                                                            ->label('Value')
                                                             ->required(),
                                                         TextInput::make('icon'),
                                                         ColorPicker::make('color'),
@@ -198,13 +197,13 @@ class PageResource extends Resource
                                         Builder\Block::make('info_with_list')
                                             ->schema([
                                                 ...$contentInfoWithInputs,
-                                                TableRepeater::make('items')
+                                                Repeater::make('items')
                                                     ->addActionLabel(__('core.add'))
-                                                    ->headers([
-                                                        Header::make('label'),
-                                                        Header::make('value'),
-                                                        Header::make('icon')->width('200px'),
-                                                        Header::make('color')->width('150px'),
+                                                    ->table([
+                                                        TableColumn::make('Label'),
+                                                        TableColumn::make('Value'),
+                                                        TableColumn::make('Icon')->width('200px'),
+                                                        TableColumn::make('Color')->width('150px'),
                                                     ])
                                                     ->schema([
                                                         TextInput::make('label'),
@@ -227,13 +226,13 @@ class PageResource extends Resource
                                                             ->required(),
                                                         TextInput::make('subtitle'),
                                                     ]),
-                                                TableRepeater::make('slides')
+                                                Repeater::make('slides')
                                                     ->addActionLabel(__('core.add'))
-                                                    ->headers([
-                                                        Header::make('slide_media')->label('Media')->width('200px'),
-                                                        Header::make('slide_title')->label('Title'),
-                                                        Header::make('slide_description')->label('Description'),
-                                                        Header::make('slide_button')->label('Button'),
+                                                    ->table([
+                                                        TableColumn::make('Media')->width('200px'),
+                                                        TableColumn::make('Title'),
+                                                        TableColumn::make('Description'),
+                                                        TableColumn::make('Button'),
                                                     ])
                                                     ->schema([
                                                         FileUpload::make('slide_media') // TODO: Delete removed images
