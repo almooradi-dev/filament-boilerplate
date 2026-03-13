@@ -8,6 +8,7 @@ use BackedEnum;
 use BezhanSalleh\FilamentShield\Traits\HasPageShield;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TagsInput;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Concerns\InteractsWithForms;
@@ -69,7 +70,6 @@ class Notifications extends Page implements HasForms
                     ->label(new HtmlString('Send to all users? <small style="color: gray">(Active users only)</small>'))
                     ->default(true)
                     ->live(),
-                // TODO: Add to boilerplate
                 Select::make('receivers')
                     ->searchable()
                     ->multiple()
@@ -88,9 +88,13 @@ class Notifications extends Page implements HasForms
                             ])
                             ->toArray();
                     })
-                    ->getOptionLabelUsing(function ($value): ?string {
-                        $user = User::find($value);
-                        return $user ? "{$user->full_name} ({$user->email})" : null;
+                    ->getOptionLabelsUsing(function (array $values): array {
+                        return User::whereIn('id', $values)
+                            ->get()
+                            ->mapWithKeys(fn($user) => [
+                                $user->id => "{$user->full_name} ({$user->email})"
+                            ])
+                            ->toArray();
                     })
                     ->optionsLimit(50)
                     ->visible(fn(Get $get) => !$get('send_to_all_users')),
@@ -107,6 +111,10 @@ class Notifications extends Page implements HasForms
                             ->required()
                             ->visible(fn(Get $get) => $get('type') == 'email'),
                     ]),
+                TagsInput::make('external_emails')
+                    ->rules(['array'])
+                    ->nestedRecursiveRules(['email', 'max:100'])
+                    ->visible(fn(Get $get) => $get('type') == 'email'),
                 Grid::make(1)
                     ->schema([
                         TextInput::make('title_en')->label('Title')->required(),
@@ -130,14 +138,19 @@ class Notifications extends Page implements HasForms
         $users = $this->data['send_to_all_users'] ? $usersQuery->get() : $usersQuery->whereIn('id', $this->data['receivers'])->get();
 
         if ($this->data['type'] == 'email') {
-            foreach ($users as $user) {
-                if (!$user->email) {
+            $emails = array_merge($users->pluck('email')->toArray(), $this->data['external_emails'] ?? []);
+
+            foreach ($emails as $toEmail) {
+                if (!filter_var($toEmail, FILTER_VALIDATE_EMAIL)) {
                     continue;
                 }
-                Mail::to($user->email)->send(new GeneralEmail([
-                    'subject' => $this->data['title_en'],
-                    'body' => $this->data['body_en'],
-                ], fromEmail: $this->data['from_email']));
+
+                $this->sendEmail(
+                    $this->data['title_en'],
+                    $this->data['body_en'],
+                    $toEmail,
+                    $this->data['from_email']
+                );
             }
         }
 
@@ -155,5 +168,22 @@ class Notifications extends Page implements HasForms
             ->title('Notification sent successfully using "' . $this->data['type'] . '"')
             ->success()
             ->send();
+    }
+
+    /**
+     * Send email to single email
+     *
+     * @param string $title
+     * @param string $body
+     * @param string $toEmail
+     * @param string $fromEmail
+     * @return void
+     */
+    private function sendEmail(string $title, string $body, string $toEmail, string $fromEmail)
+    {
+        Mail::to($toEmail)->send(new GeneralEmail([
+            'subject' => $title,
+            'body' => $body,
+        ], fromEmail: $fromEmail));
     }
 }

@@ -6,7 +6,6 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 
-// TODO: Add to boilerplate
 class SetLocale
 {
     public function handle(Request $request, Closure $next)
