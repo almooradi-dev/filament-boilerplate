@@ -15,7 +15,7 @@ class SetLocale
         // if ($user && isset($user->preferred_language)) {
         //     App::setLocale($user->preferred_language);
         // } else {
-            $locale = $request->locale ?? session('locale') ?? config('app.locale');
+            $locale = $request->input('locale') ?? session('locale') ?? config('app.locale');
             App::setLocale($locale);
         // }
 

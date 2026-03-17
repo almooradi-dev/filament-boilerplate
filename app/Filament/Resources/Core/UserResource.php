@@ -8,7 +8,6 @@ use App\Tables\Columns\ColorColumn;
 use BackedEnum;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Get;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Tables;
@@ -22,6 +21,7 @@ use Illuminate\Support\Facades\Hash;
 use Filament;
 use Filament\Forms\Components\FileUpload;
 use Filament\Schemas\Components\Grid;
+use Filament\Schemas\Components\Utilities\Get;
 
 class UserResource extends Resource
 {

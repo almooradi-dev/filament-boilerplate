@@ -9,7 +9,6 @@ use BackedEnum;
 use Filament\Forms\Components\ColorPicker;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
-use Filament\Forms\Set;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Tables;
@@ -21,6 +20,7 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Str;
 use LaraZeus\SpatieTranslatable\Resources\Concerns\Translatable;
 use Filament;
+use Filament\Schemas\Components\Utilities\Set;
 
 class UserStatusResource extends Resource
 {
