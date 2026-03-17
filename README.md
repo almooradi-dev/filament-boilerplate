@@ -4,8 +4,9 @@
     - [ ] Notifications
     - [ ] Google Analytics
 - [ ] Add link to https://github.com/alexeymezenin/laravel-best-practices#follow-laravel-naming-conventions as a reference
-- [ ] Themes
-    - [ ] Theme 01
+- [x] Themes
+    - [x] Theme 01
+    - [x] Theme 02
 - [ ] Use Laravel Notification system instead of our custom one
 
 # Setup
