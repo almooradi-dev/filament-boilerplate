@@ -171,6 +171,9 @@ class AppServiceProvider extends ServiceProvider
     protected function registerModulePolicies()
     {
         $modulesPath = base_path('Modules');
+        if (!File::isDirectory($modulesPath)) {
+            return;
+        }
         $modules = File::directories($modulesPath);
 
         foreach ($modules as $modulePath) {
