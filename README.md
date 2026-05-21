@@ -8,6 +8,7 @@
     - [x] Theme 01
     - [x] Theme 02
 - [ ] Use Laravel Notification system instead of our custom one
+- [ ] Add https://laravel-lang.com
 
 # Setup
 **Migrate**
