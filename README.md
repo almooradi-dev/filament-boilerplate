@@ -79,13 +79,13 @@ More details here: https://filamentphp.com/docs/3.x/panels/installation#improvin
 - https://spatie.be/docs/laravel-permission/v6/installation-laravel
 - https://filamentphp.com/plugins/bezhansalleh-shield
 
-### Name Convention Used
-{action}_{ResourceModelName}
+### Permission Name Convention Used
+{action}::{ResourceModelName}
 
 Examples:
-- viewAny_User
-- create_UserType
-- forceDeleteAny_PostCategory
+- view_any::user
+- create::user_type
+- force_delete_any::post_category
 
 # Basics
 - Create a model in a sub-directory
