@@ -103,6 +103,10 @@ Examples:
 
 
 ```bash
+php artisan module:make MyModule
+
+php artisan module:filament:install MyModule
+
 php artisan module:make-model ChallengeJudgingFormQuestion ChallengeJudging -m
 ```
 
