@@ -168,19 +168,18 @@ class AppServiceProvider extends ServiceProvider
         return isset($_SERVER['argv'][1]) && in_array($_SERVER['argv'][1], $commands);
     }
 
+
+
     protected function registerModulePolicies()
     {
         $modulesPath = base_path('Modules');
-        if (!File::isDirectory($modulesPath)) {
-            return;
-        }
         $modules = File::directories($modulesPath);
-
+        
         foreach ($modules as $modulePath) {
             $moduleName = basename($modulePath);
 
-            $modelsPath = $modulePath . '/Models';
-            $policiesPath = $modulePath . '/Policies';
+            $modelsPath = $modulePath . '/app/Models';
+            $policiesPath = $modulePath . '/app/Policies';
 
             if (!File::isDirectory($modelsPath) || !File::isDirectory($policiesPath)) {
                 continue;
