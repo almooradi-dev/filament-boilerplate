@@ -8,6 +8,7 @@
     - [x] Theme 01
     - [x] Theme 02
 - [ ] Use Laravel Notification system instead of our custom one
+- [ ] Add https://laravel-lang.com
 
 # Setup
 **Migrate**
@@ -79,13 +80,13 @@ More details here: https://filamentphp.com/docs/3.x/panels/installation#improvin
 - https://spatie.be/docs/laravel-permission/v6/installation-laravel
 - https://filamentphp.com/plugins/bezhansalleh-shield
 
-### Name Convention Used
-{action}_{ResourceModelName}
+### Permission Name Convention Used
+{action}::{ResourceModelName}
 
 Examples:
-- viewAny_User
-- create_UserType
-- forceDeleteAny_PostCategory
+- view_any::user
+- create::user_type
+- force_delete_any::post_category
 
 # Basics
 - Create a model in a sub-directory
@@ -103,6 +104,10 @@ Examples:
 
 
 ```bash
+php artisan module:make MyModule
+
+php artisan module:filament:install MyModule
+
 php artisan module:make-model ChallengeJudgingFormQuestion ChallengeJudging -m
 ```
 

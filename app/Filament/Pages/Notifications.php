@@ -122,7 +122,10 @@ class Notifications extends Page implements HasForms
                     ]),
                 Grid::make(1)
                     ->schema([
-                        RichEditor::make('body_en')->label('Body')->required(), // TODO: Change the uploaded files directory 
+                        RichEditor::make('body_en')
+                            ->label('Body')
+                            ->required()
+                            ->fileAttachmentsDirectory('notifications/attachments'),
                         // Textarea::make('body_en')->label('Body (EN)')->rows(10)->requiredWith('body_ar'),
                         // Textarea::make('body_ar')->label('Body (AR)')->rows(10)->requiredWith('body_en'),
                     ]),
