@@ -111,7 +111,7 @@ class PageResource extends Resource
                             ->label(__('core.content'))
                             ->schema([
                                 Builder::make('content')
-                                    ->label('')
+                                    ->hiddenLabel()
                                     ->addActionLabel(__('core.add'))
                                     ->blocks([
                                         // Heading
@@ -153,7 +153,7 @@ class PageResource extends Resource
                                                 TextInput::make('description')
                                                     ->columnSpanFull(),
                                                 Repeater::make('items')
-                                                    ->label('')
+                                                    ->hiddenLabel()
                                                     ->addActionLabel(__('core.add'))
                                                     ->table([
                                                         TableColumn::make('Label'),
@@ -280,7 +280,7 @@ class PageResource extends Resource
             ->actions([
                 Filament\Actions\EditAction::make(),
             ])
-            ->bulkActions([
+            ->toolbarActions([
                 Filament\Actions\BulkActionGroup::make([
                     Filament\Actions\DeleteBulkAction::make(),
                 ]),

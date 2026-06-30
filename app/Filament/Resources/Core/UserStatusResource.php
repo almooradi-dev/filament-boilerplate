@@ -91,7 +91,7 @@ class UserStatusResource extends Resource
                 Filament\Actions\ForceDeleteAction::make(),
                 Filament\Actions\RestoreAction::make(),
             ])
-            ->bulkActions([
+            ->toolbarActions([
                 Filament\Actions\BulkActionGroup::make([
                     Filament\Actions\DeleteBulkAction::make(),
                     Filament\Actions\ForceDeleteBulkAction::make(),

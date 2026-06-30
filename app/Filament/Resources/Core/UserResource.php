@@ -69,7 +69,7 @@ class UserResource extends Resource
                     ->label(__('core.password'))
                     ->password()
                     ->minLength(8)
-                    ->reactive()
+                    ->live()
                     ->dehydrateStateUsing(fn($state) => Hash::make($state))
                     ->dehydrated(fn($state) => !empty($state) ? true : false)
                     ->revealable()
@@ -77,7 +77,7 @@ class UserResource extends Resource
                 TextInput::make('password_confirmation')
                     ->label(__('core.password_confirmation'))
                     ->password()
-                    ->reactive()
+                    ->live()
                     ->required(fn($get) => !empty($get('password')) ? true : false)
                     ->same('password')
                     ->dehydrated(false)
@@ -141,7 +141,7 @@ class UserResource extends Resource
             ->actions([
                 Filament\Actions\EditAction::make(),
             ])
-            ->bulkActions([
+            ->toolbarActions([
                 Filament\Actions\BulkActionGroup::make([
                     Filament\Actions\DeleteBulkAction::make(),
                     Filament\Actions\ForceDeleteBulkAction::make(),
