@@ -98,7 +98,7 @@ class PageResource extends Resource
                                     ->required(),
                                 TextInput::make('key')
                                     ->label(__('core.key'))
-                                    ->unique(ignoreRecord: true)
+                                    ->unique()
                                     ->required(),
                                 Toggle::make('is_active')
                                     ->label(__('core.is_active'))
@@ -181,6 +181,7 @@ class PageResource extends Resource
                                                 FileUpload::make('images') // TODO: Delete removed images
                                                     ->multiple()
                                                     ->image()
+                                                    ->maxSize(config('filament.uploads.max_size'))
                                                     ->imageEditor()
                                                     ->downloadable()
                                                     ->directory('pages')
@@ -237,6 +238,7 @@ class PageResource extends Resource
                                                     ->schema([
                                                         FileUpload::make('slide_media') // TODO: Delete removed images
                                                             ->image()
+                                                            ->maxSize(config('filament.uploads.max_size'))
                                                             ->imageEditor()
                                                             ->downloadable()
                                                             ->directory('pages'),
@@ -271,13 +273,13 @@ class PageResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('name')->label(__('core.name')),
+                TextColumn::make('name')->searchable()->label(__('core.name')),
                 ToggleColumn::make('is_active')->label(__('core.is_active')),
             ])
             ->filters([
-                //
+                \Filament\Tables\Filters\TernaryFilter::make('is_active')->label(__('core.is_active')),
             ])
-            ->actions([
+            ->recordActions([
                 Filament\Actions\EditAction::make(),
             ])
             ->toolbarActions([

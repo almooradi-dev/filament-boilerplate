@@ -62,7 +62,7 @@ class UserResource extends Resource
                     ]),
                 TextInput::make('email')
                     ->label(__('core.email'))
-                    ->unique(ignoreRecord: true)
+                    ->unique()
                     ->email(),
 
                 TextInput::make('password')
@@ -96,11 +96,13 @@ class UserResource extends Resource
                     ->unique(ignorable: fn(?Model $record) => $record, modifyRuleUsing: fn(Unique $rule, Get $get) => $rule->where('phone', $get('phone'))->where('country_code', $get('country_code'))),
                 Select::make('status_id')
                     ->label(__('core.status'))
+                    ->searchable()
                     ->relationship('status', 'name', fn(Builder $query) => $query->whereActive()->orderBy('id', 'asc')),
                 Select::make('roles')
                     ->label(__('core.roles'))
                     ->multiple()
                     ->preload()
+                    ->searchable()
                     // ->default([getDefaultID('role')])
                     ->relationship('roles', 'name', fn($query) => $query->when(!auth()->user()->hasRole('super_admin'), fn($query) => $query->where('name', '!=', 'super_admin'))),
 
@@ -108,6 +110,7 @@ class UserResource extends Resource
                     ->label(__('core.avatar'))
                     ->moveFiles()
                     ->image()
+                    ->maxSize(config('filament.uploads.max_size'))
                     ->directory('users')
                     ->openable()
                     ->downloadable()
@@ -138,7 +141,7 @@ class UserResource extends Resource
             ->filters([
                 Tables\Filters\TrashedFilter::make(),
             ])
-            ->actions([
+            ->recordActions([
                 Filament\Actions\EditAction::make(),
             ])
             ->toolbarActions([

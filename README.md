@@ -10,6 +10,7 @@
 - [ ] Use Laravel Notification system instead of our custom one
 - [ ] Add https://laravel-lang.com
 - [ ] Add `vendor/bin/filacheck` to docs
+- [ ] Add `Claude Skills` to docs
 
 # Setup
 **Migrate**

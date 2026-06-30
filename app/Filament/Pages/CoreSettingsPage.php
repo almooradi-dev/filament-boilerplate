@@ -45,6 +45,7 @@ class CoreSettingsPage extends SettingsPage implements HasForms
                     ->label(__('core.logo_light'))
                     ->moveFiles()
                     ->image()
+                    ->maxSize(config('filament.uploads.max_size'))
                     ->directory('settings/core')
                     ->openable()
                     ->downloadable(),
@@ -52,6 +53,7 @@ class CoreSettingsPage extends SettingsPage implements HasForms
                     ->label(__('core.logo_dark'))
                     ->moveFiles()
                     ->image()
+                    ->maxSize(config('filament.uploads.max_size'))
                     ->directory('settings/core')
                     ->openable()
                     ->downloadable(),
@@ -59,6 +61,7 @@ class CoreSettingsPage extends SettingsPage implements HasForms
                     ->label(__('core.default_avatar'))
                     ->moveFiles()
                     ->image()
+                    ->maxSize(config('filament.uploads.max_size'))
                     ->directory('settings/core')
                     ->openable()
                     ->downloadable()

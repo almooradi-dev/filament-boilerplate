@@ -83,9 +83,10 @@ class UserStatusResource extends Resource
                 ToggleColumn::make('is_active')->label(__('core.is_active'))
             ])
             ->filters([
+                Tables\Filters\TernaryFilter::make('is_active')->label(__('core.is_active')),
                 Tables\Filters\TrashedFilter::make(),
             ])
-            ->actions([
+            ->recordActions([
                 Filament\Actions\EditAction::make(),
                 Filament\Actions\DeleteAction::make(),
                 Filament\Actions\ForceDeleteAction::make(),

@@ -14,7 +14,9 @@ class FilamentCustomizationServiceProvider extends ServiceProvider
     public function boot(): void
     {
         LanguageSwitch::configureUsing(function (LanguageSwitch $switch) {
-            $switch->locales(config('app.available_locales'));
+            $switch
+                ->visible(config('filament.ui_localization.enabled', false))
+                ->locales(config('app.available_locales'));
         });
 
         FileUpload::configureUsing(function (FileUpload $component) {
