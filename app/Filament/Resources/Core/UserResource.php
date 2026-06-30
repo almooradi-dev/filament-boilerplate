@@ -110,7 +110,6 @@ class UserResource extends Resource
                     ->label(__('core.avatar'))
                     ->moveFiles()
                     ->image()
-                    ->maxSize(config('filament.uploads.max_size'))
                     ->directory('users')
                     ->openable()
                     ->downloadable()

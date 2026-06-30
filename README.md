@@ -11,6 +11,7 @@
 - [ ] Add https://laravel-lang.com
 - [ ] Add `vendor/bin/filacheck` to docs
 - [ ] Add `Claude Skills` to docs
+- [ ] Add to docs that `FileUpload::maxSize` has a default value from `app/Providers/Filament/FilamentCustomizationServiceProvider.php`
 
 # Setup
 **Migrate**

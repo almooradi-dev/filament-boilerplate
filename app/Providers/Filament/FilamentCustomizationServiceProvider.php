@@ -22,6 +22,7 @@ class FilamentCustomizationServiceProvider extends ServiceProvider
         FileUpload::configureUsing(function (FileUpload $component) {
             $component->visibility('public');
             $component->disk('public');
+            $component->maxSize(config('filament.uploads.max_size')); // Override per-field with ->maxSize(...) when needed
         });
 
         ImageColumn::configureUsing(function (ImageColumn $component) {

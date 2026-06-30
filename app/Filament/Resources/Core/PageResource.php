@@ -181,7 +181,6 @@ class PageResource extends Resource
                                                 FileUpload::make('images') // TODO: Delete removed images
                                                     ->multiple()
                                                     ->image()
-                                                    ->maxSize(config('filament.uploads.max_size'))
                                                     ->imageEditor()
                                                     ->downloadable()
                                                     ->directory('pages')
@@ -238,7 +237,6 @@ class PageResource extends Resource
                                                     ->schema([
                                                         FileUpload::make('slide_media') // TODO: Delete removed images
                                                             ->image()
-                                                            ->maxSize(config('filament.uploads.max_size'))
                                                             ->imageEditor()
                                                             ->downloadable()
                                                             ->directory('pages'),
