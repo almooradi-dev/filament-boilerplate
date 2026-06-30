@@ -76,7 +76,7 @@ class AdminPanelProvider extends PanelProvider
             ->plugins([
                 \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make(),
                 \LaraZeus\SpatieTranslatable\SpatieTranslatablePlugin::make()
-                    ->defaultLocales(['en', 'ar']),
+                    ->defaultLocales(config('app.available_locales')),
                 \Coolsam\Modules\ModulesPlugin::make()
             ]);
     }

@@ -2,6 +2,7 @@
 
 namespace App\Providers\Filament;
 
+use BezhanSalleh\LanguageSwitch\LanguageSwitch;
 use Filament\Forms\Components\FileUpload;
 use Filament\Infolists\Components\ImageEntry;
 use Filament\Tables\Columns\ImageColumn;
@@ -12,6 +13,10 @@ class FilamentCustomizationServiceProvider extends ServiceProvider
 {
     public function boot(): void
     {
+        LanguageSwitch::configureUsing(function (LanguageSwitch $switch) {
+            $switch->locales(config('app.available_locales'));
+        });
+
         FileUpload::configureUsing(function (FileUpload $component) {
             $component->visibility('public');
             $component->disk('public');
